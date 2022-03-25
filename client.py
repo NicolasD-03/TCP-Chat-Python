@@ -5,8 +5,12 @@ import sys
 from time import sleep
 
 # Const variables
-HOST: str = str(sys.argv[1]) or "127.0.0.1"
-PORT: int = int(sys.argv[2]) or 6666
+if len(sys.argv) == 3:
+    HOST: str = str(sys.argv[1])
+    PORT: int = int(sys.argv[2])
+else:
+    HOST: str = "127.0.0.1"
+    PORT: int = 6666
 
 # Ask a nickname
 nickname = input("Enter your nickname for the chat : ")
@@ -43,7 +47,12 @@ def write():
         try:
             # Wait for a message
             inputMessage = input("")
-            if inputMessage == "QUIT":
+            if inputMessage == "/help":
+                print("----- HELP -----")
+                print("/help : Show this help")
+                print("/quit : Quit the chat")
+                print("--------------------")
+            elif inputMessage == "/quit":
                 # Close the connection and quit
                 client.close()
                 os._exit(0)

@@ -5,8 +5,13 @@ import threading
 from time import sleep
 
 # Const variables
-HOST: str = str(sys.argv[1]) or "127.0.0.1"
-PORT: int = int(sys.argv[2]) or 6666
+if len(sys.argv) == 3:
+    HOST: str = str(sys.argv[1])
+    PORT: int = int(sys.argv[2])
+else:
+    HOST: str = "127.0.0.1"
+    PORT: int = 6666
+
 
 # Starting server and (creating and bind the socket)
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -120,11 +125,18 @@ def command():
     while True:
         # Wait for a command
         command = input("")
+        if command == "/help":
+            print("----- HELP -----")
+            print("/help - Show this help")
+            print("/list - Show connected clients nicknames list")
+            print("/kick <client_nickname> - Kick a client")
+            print("/stop - Stop the server")
+            print("-----------------")
         # If command == list, show connected clients nicknames list
-        if command == "list":
+        elif command == "/list":
             print(nicknames)
         # If command == kick, kick the client
-        elif command.split()[0] == "kick":
+        elif command.split()[0] == "/kick":
             # Verify if nickname is in the connected clients nicknames list
             if len(command.split()) > 1 and command.split()[1] in nicknames:
                 # Get the index of nickname
@@ -148,7 +160,7 @@ def command():
             else:
                 print("User doesn't exist")
         # If command == stop, close the server
-        elif command == "stop":
+        elif command == "/stop":
             server.close
             os._exit(0)
         else:
