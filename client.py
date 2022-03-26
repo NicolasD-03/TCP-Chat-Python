@@ -77,7 +77,7 @@ def ping(ping_every: int):
         sleep(ping_every)
         try:
             # Send PING message to the server
-            client.sendall("PING".encode("utf8"))
+            client.send("PING".encode("utf8"))
         except:
             # If the message can't reach show a message close the connection and quit
             print("Sorry your message can't be delliver, server is ofline")
