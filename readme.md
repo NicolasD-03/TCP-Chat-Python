@@ -26,7 +26,14 @@ A simple TCP chat server-client application in python. The server listens on a p
 
 ## Setup
 
-You need `python 3.6` or later to run this application. _(Not tested on python version above 3.6)_
+### Docker
+
+Just type this to your terminal with docker installed, you can bind the host port to `6666` _ex : -p <desired_host_port>:6666_
+
+    $docker run -dit nicolasd57/tcp-chat-python
+
+You need `python 3.6` or later to run this application. _(Not tested on python version above 3.6)_\
+Clone the repo on your device and go and open the folder
 
 ### Server
 
